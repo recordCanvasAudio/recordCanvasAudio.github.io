@@ -31,7 +31,8 @@ $(function(){
     var pubnub = PUBNUB.init({
         publish_key   : 'pub-c-8e45f540-691c-4e55-9f07-f2278795ec3d', // Your Pub Key
         subscribe_key : 'sub-c-b5732f80-4ccf-11e6-8b3b-02ee2ddab7fe', // Your Sub Key
-        uuid: 'broadcaster'
+        uuid: uuid,
+        ssl : true
     });
 
 
