@@ -4,7 +4,7 @@ $(function(){
     // 4 images
     var image0 = "img/cat1.jpg";
     var image1 = "img/cat2.jpg";
-    var image2= "img/cat3.jpg";
+    var image2 = "img/cat3.jpg";
     var image3 = "img/cat4.jpg";
     // array of 4 images
     var images = new Array(image0, image1, image2, image3);
@@ -24,6 +24,8 @@ $(function(){
     //$('img.images').attr('src',images[counter]);
 
     var channel = 'myChannel';
+    var ch_event;
+    //var channelSite;
     //console.log('Channel: '+channel);
 
     var uuid = PUBNUB.uuid();
@@ -32,36 +34,62 @@ $(function(){
         publish_key   : 'pub-c-8e45f540-691c-4e55-9f07-f2278795ec3d', // Your Pub Key
         subscribe_key : 'sub-c-b5732f80-4ccf-11e6-8b3b-02ee2ddab7fe', // Your Sub Key
         uuid: uuid,
-        ssl : true
+        ssl :true
     });
 
 
     // Publish to a channel, but only
     // after we've connected from the subscriber
 
-    pubnub.subscribe({
-        channel : channel,
-        message : function(m){
-            console.log(m);
-        },
-        presence : function(m){
-            //console.log(m)
-            $('div.presence').html('<h2>'+m.occupancy+'<h2>');
+    $('#btn-subscribe').click(function() {
 
-        },
-        state: {
-            user : "broadcaster",
-            status : "on",
-            age: 67,
-            full: 'Robert Plant',
+        var ch_site = $('#ch_site').val();
+        ch_event = $('#ch_event').val();
 
-        },
-        connect : function(e) {
-            /*pubnub.publish({
-                channel : channel,
-                message : 'on'
-            });*/
-        }
+        console.log(ch_site+' '+ch_event);
+
+        var re = /.*EV+(.*)+BG.*/;
+        var event_id = ch_event.replace(re, "$1");
+
+        console.log(event_id);
+
+        pubnub.subscribe({
+            channel: ch_site,
+            message: function (m) {
+                console.log(m);
+            },
+            presence: function (m) {
+                console.log('site');
+                console.log(m);
+                //$('div.presence').html('<h2>' + m.occupancy + '<h2>');
+            },
+            state: {
+                user     : "broadcaster",
+                status   : "on",
+                event_id : event_id
+            },
+            connect: function (e) {
+            }
+        });
+
+        pubnub.subscribe({
+            channel: ch_event,
+            message: function (m) {
+                console.log(m);
+            },
+            presence: function (m) {
+                console.log('ev');
+                console.log(m);
+                //$('div.presence').html('<h2>' + m.occupancy + '<h2>');
+
+            },
+            connect: function (e) {
+                /*pubnub.publish({
+                 channel : channel,
+                 message : 'on'
+                 });*/
+            }
+        });
     });
 
 
@@ -118,6 +146,24 @@ $(function(){
         }
     });
 
+
+
+    /*$.fn.serializeObject = function()
+    {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function() {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };*/
 
 
 });
