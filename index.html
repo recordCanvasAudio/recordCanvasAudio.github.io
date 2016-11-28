@@ -6,21 +6,33 @@
 </head>
 <body>
 
-<h1>Broadcaster</h1>
-<div class="presence"></div>
+    <div class="dv_sub">
+        <form id="frm_stream">
+            site:<input type="text" id="ch_site" name="ch_site">
+            event:<input type="text" id="ch_event" name="ch_event">
+            <button id="btn-subscribe" type="button">Subscriber</button>
+        </form>
+    </div>
 
-<button id="quitter">quitter</button><br/><br/><br/>
+    <div class="content">
+        <h1>Broadcaster</h1>
+        <button id="quitter">quitter</button>
+        <button id="nextSlide">Start</button>
+        <div>
+        <h2 style="float: left">Viewers : &nbsp;</h2>
+        <div style="float: left" class="presence"></div>
+        </div>
 
-<img style="display: none" width="400px" height="400px" class="images"/>
-<h1 class="numQuestion"></h1>
 
+        <img style="display: none" width="400px" height="400px" class="images"/>
+        <h1 class="numQuestion"></h1>
 
-<button id="nextSlide">Start</button>
-<br><br><h1 style="color: #FC6D26;" id="timer"></h1>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="//cdn.pubnub.com/pubnub-3.7.14.min.js"></script>
-<script src="script.js"></script>
+        <br><br><h1 style="color: #FC6D26;" id="timer"></h1>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="//cdn.pubnub.com/pubnub-3.7.14.min.js"></script>
+    <script src="js/br.js"></script>
+    <script src="js/script.js"></script>
 
 </body>
 </html>
