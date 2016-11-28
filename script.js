@@ -80,7 +80,7 @@ $(function(){
             presence: function (m) {
                 console.log('ev');
                 console.log(m);
-                //$('div.presence').html('<h2>' + m.occupancy + '<h2>');
+                $('div.presence').html('<h2>' + m.occupancy + '<h2>');
 
             },
             connect: function (e) {
