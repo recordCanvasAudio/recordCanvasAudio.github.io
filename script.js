@@ -48,10 +48,10 @@ $(function(){
 
         console.log(ch_site+' '+ch_event);
 
-        var re = /.*EV+(.*)+BG.*/;
-        var event_id = ch_event.replace(re, "$1");
+        //var re = /.*EV+(.*)+BG.*/;
+        //var event_id = ch_event.replace(re, "$1");
 
-        console.log(event_id);
+        //console.log(event_id);
 
         pubnub.subscribe({
             channel: ch_site,
@@ -66,7 +66,7 @@ $(function(){
             state: {
                 user     : "broadcaster",
                 status   : "on",
-                event_id : event_id
+                event_id : ch_event
             },
             connect: function (e) {
             }
